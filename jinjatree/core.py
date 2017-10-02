@@ -65,7 +65,7 @@ class JinjaTree(TreeRenderer):
                 self.process_content(content)
 
     def adopt_orphan_nodes(self):
-        self.root = Node('templates')
+        self.root = Node('jinjas')
         for node in self.orphan_nodes:
             node.parent = self.root
 
