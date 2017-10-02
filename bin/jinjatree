@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import sys
 
 from jinjatree.core import JinjaTree
 
@@ -8,13 +9,26 @@ from jinjatree.core import JinjaTree
 def parse():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', type=str)
+    parser.add_argument(
+        '--output', type=str, default='png', choices={'png', 'dot'})
+    parser.add_argument(
+        '--file', required='--output' in sys.argv, type=str)
     return parser.parse_args()
 
 
 def main():
     args = parse()
+
+    output_renderer_map = {
+        'png': 'render_image',
+        'dot': 'generate_dotfile'}
+
     tree = JinjaTree(args.path)
-    tree.render()
+
+    if args.output:
+        getattr(tree, output_renderer_map[args.output])(args.file)
+    else:
+        tree.render()
 
 
 if __name__ == '__main__':
