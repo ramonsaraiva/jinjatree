@@ -1,7 +1,10 @@
 import os
 import re
 
-from anytree import Node, RenderTree
+from anytree import (
+    Node,
+    RenderTree)
+from anytree.dotexport import RenderTreeGraph
 
 
 PATTERN = r'(extends|include|from) [\"\'](.*?)[\"\']'
@@ -74,3 +77,6 @@ class JinjaTree:
     def render(self):
         for pre, fill, node in RenderTree(self.root):
             print(f'{pre}{node.name}')
+
+    def render_image(self, name):
+        RenderTreeGraph(self.root).to_picture(name)
