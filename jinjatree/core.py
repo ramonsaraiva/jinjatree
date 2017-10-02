@@ -7,10 +7,20 @@ from anytree import (
 from anytree.dotexport import RenderTreeGraph
 
 
-PATTERN = r'(extends|include|from) [\"\'](.*?)[\"\']'
+class TreeRenderer:
+
+    def render(self):
+        for pre, fill, node in RenderTree(self.root):
+            print(f'{pre}{node.name}')
+
+    def render_image(self, name):
+        RenderTreeGraph(self.root).to_picture(name)
+
+    def generate_dotfile(self, name):
+        RenderTreeGraph(self.root).to_dotfile(name)
 
 
-class JinjaTree:
+class JinjaTree(TreeRenderer):
 
     RELATIONSHIP_PATTERN = r'(extends|include|from) [\"\'](.*?)[\"\']'
 
@@ -73,13 +83,3 @@ class JinjaTree:
         self.load_jinjas()
         self.build_nodes()
         self.adopt_orphan_nodes()
-
-    def render(self):
-        for pre, fill, node in RenderTree(self.root):
-            print(f'{pre}{node.name}')
-
-    def render_image(self, name):
-        RenderTreeGraph(self.root).to_picture(name)
-
-    def generate_dotfile(self, name):
-        RenderTreeGraph(self.root).to_dotfile(name)
