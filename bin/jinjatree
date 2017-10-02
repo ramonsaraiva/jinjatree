@@ -10,7 +10,7 @@ def parse():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', type=str)
     parser.add_argument(
-        '--output', type=str, default='png', choices={'png', 'dot'})
+        '--output', type=str, required=False, choices={'png', 'dot'})
     parser.add_argument(
         '--file', required='--output' in sys.argv, type=str)
     return parser.parse_args()
