@@ -80,3 +80,6 @@ class JinjaTree:
 
     def render_image(self, name):
         RenderTreeGraph(self.root).to_picture(name)
+
+    def generate_dotfile(self, name):
+        RenderTreeGraph(self.root).to_dotfile(name)
