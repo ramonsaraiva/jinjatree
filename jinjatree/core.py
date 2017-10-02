@@ -35,7 +35,7 @@ class JinjaTree(TreeRenderer):
 
     @property
     def orphan_nodes(self):
-        return (node for node in self.nodes if node.is_root)
+        return (node for node in self.nodes if node.is_root and node.children)
 
     def load_jinjas(self):
         for path, name, filenames in os.walk(self.location):
