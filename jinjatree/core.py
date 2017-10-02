@@ -42,10 +42,10 @@ class JinjaTree:
             if relationship == 'extends':
                 self.current_node.parent = node
                 continue
-            if relationship == 'include':
-                if not created:
-                    node = Node(name)
-                node.parent = self.current_node
+            # include (partials) or from .. import (macros)
+            if not created:
+                node = Node(name)
+            node.parent = self.current_node
 
     def build_nodes(self):
         for path, jinja in self.jinjas:
