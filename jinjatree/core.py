@@ -27,7 +27,7 @@ class JinjaTree(TreeRenderer):
     def __init__(self, location):
         self.nodes = []
         self.jinjas = []
-        self.location = location
+        self.location = os.path.abspath(location)
         self.current_node = None
         self.root = None
 
@@ -39,9 +39,9 @@ class JinjaTree(TreeRenderer):
 
     def load_jinjas(self):
         for path, name, filenames in os.walk(self.location):
-            normalized_path = path.replace(self.location, '')[1:]
+            norm_path = os.path.abspath(path).replace(self.location, '')
             self.jinjas += [
-                (f'{path}/{f}', f'{normalized_path}/{f}')
+                (f'{path}/{f}', f'{norm_path}/{f}' if norm_path else f'{f}')
                 for f in filenames if f.endswith('.jinja')
             ]
 
