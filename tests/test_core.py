@@ -6,7 +6,7 @@ from jinjatree.core import JinjaTree, TreeRenderer
 class JinjaTreeTest(TestCase):
 
     def setUp(self):
-        self.jinjatree = JinjaTree()
+        self.jinjatree = JinjaTree('')
 
     def test_attr(self):
         self.assertEqual(
