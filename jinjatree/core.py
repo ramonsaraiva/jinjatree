@@ -42,7 +42,7 @@ class JinjaTree(TreeRenderer):
             norm_path = os.path.abspath(path).replace(self.location, '')[1:]
             self.jinjas += [
                 ('{path}/{f}'.format(path=path, f=f), '{norm_path}/{f}'.format(
-                    path=path, f=f) if norm_path else '{f}'.format(f=f))
+                    norm_path=path, f=f) if norm_path else '{f}'.format(f=f))
                 for f in filenames if f.endswith('.jinja')
             ]
 
