@@ -11,7 +11,7 @@ class TreeRenderer:
 
     def render(self):
         for pre, fill, node in RenderTree(self.root):
-            print(f'{pre}{node.name}')
+            print('{pre}{node_name}'.format(pre=pre, node_name=node.name))
 
     def render_image(self, name):
         RenderTreeGraph(self.root).to_picture(name)
@@ -41,7 +41,8 @@ class JinjaTree(TreeRenderer):
         for path, name, filenames in os.walk(self.location):
             norm_path = os.path.abspath(path).replace(self.location, '')[1:]
             self.jinjas += [
-                (f'{path}/{f}', f'{norm_path}/{f}' if norm_path else f'{f}')
+                ('{path}/{f}'.format(path=path, f=f), '{norm_path}/{f}'.format(
+                    norm_path=path, f=f) if norm_path else '{f}'.format(f=f))
                 for f in filenames if f.endswith('.jinja')
             ]
 
