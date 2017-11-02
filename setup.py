@@ -9,4 +9,5 @@ setup(name='jinjatree',
       license='MIT',
       packages=['jinjatree'],
       scripts=['bin/jinjatree'],
+      install_requires=['anytree'],
       zip_safe=False)
